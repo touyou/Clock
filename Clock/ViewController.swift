@@ -11,6 +11,7 @@ import UIKit
 @objc
 class ViewController: UIViewController {
 
+    // hoge1はhogeの10の位,hoge2はhogeの1の位
     @IBOutlet var hour1: UIImageView!
     @IBOutlet var hour2: UIImageView!
     @IBOutlet var min1: UIImageView!
@@ -42,13 +43,16 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // 変換関数、カレンダーからとった時刻情報は二桁の数字になるのでそれを一桁ずつ扱えるようにする
     func convert(n: Int) -> [Int] {
         return [n/10, n%10]
     }
     
+    // 時刻更新のための関数
     func nowTime() {
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
+        // この下のcomponentsの書き方はSwift2.0から
         let components = calendar.components([.Hour,.Minute,.Second],fromDate: date)
         var hour = convert(components.hour)
         var min = convert(components.minute)
